@@ -23,6 +23,9 @@ namespace Sharper.C.Control
 
         public static State<S, Unit> Set<S>(S s)
         =>  new State<S, Unit>(_ => And.Mk(UNIT, s));
+
+        public static State<S, A> Join<S, A>(this State<S, State<S, A>> x)
+        =>  new State<S, A>(s => x.Run(s).Args((sa, s1) => sa.Run(s1)));
     }
 
     public struct State<S, A>
