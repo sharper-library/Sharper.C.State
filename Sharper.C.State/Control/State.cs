@@ -47,7 +47,7 @@ namespace Sharper.C.Control
             return new State<S, B>(s => go(s).MapFst(f));
         }
 
-        public State<S, B> Map<B>(Func<A, State<S, B>> f)
+        public State<S, B> FlatMap<B>(Func<A, State<S, B>> f)
         {   var go = run;
             return
                 new State<S, B>
