@@ -33,6 +33,15 @@ namespace Sharper.C.Control
         {   this.run = run;
         }
 
+        public And<A, S> Run(S initialState)
+        =>  run(initialState);
+
+        public S Exec(S initialState)
+        =>  Run(initialState).Snd;
+
+        public A Eval(S initialState)
+        =>  Run(initialState).Fst;
+
         public State<S, B> Map<B>(Func<A, B> f)
         {   var go = run;
             return new State<S, B>(s => go(s).MapFst(f));
